@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace : package + classname -->
+<mapper namespace="com.study.security2.repository.LoginRepository">
+
+    <select id="findAllMember" resultType="com.study.security2.model.Member">
+        SELECT *
+          FROM member
+    </select>
+
+    <insert id="createMember" parameterType="com.study.security2.model.Member">
+        insert into member values(#{login_id:VARCHAR}, #{user_nm:VARCHAR}, #{password:VARCHAR})
+    </insert>
+</mapper>
+
+
