@@ -1,23 +1,21 @@
-package com.study.security2.model;
+package com.study.security2.auth;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import com.study.security2.model.Member;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-@Getter
-@Setter
 @ToString
-@Builder
-public class Member implements UserDetails {
+public class MemberUserDetails implements UserDetails {
 
-    private String login_id;
-    private String password;
-    private String user_nm;
+    private Member member;
+
+    //일반 로그인
+    public MemberUserDetails(Member member) {
+        this.member = member;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -25,8 +23,13 @@ public class Member implements UserDetails {
     }
 
     @Override
+    public String getPassword() {
+        return member.getPassword();
+    }
+
+    @Override
     public String getUsername() {
-        return this.user_nm;
+        return member.getUser_nm();
     }
 
     @Override

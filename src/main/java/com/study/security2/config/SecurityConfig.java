@@ -17,10 +17,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         http
                 .authorizeRequests()
+                .antMatchers("/mypage/*").authenticated()
                 .anyRequest().permitAll()
             .and()
                 .formLogin()
-                .loginPage("/login")
+                .usernameParameter("login_id")
+                .passwordParameter("password")
+                .loginPage("/loginForm")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/member")
              ;
     }
 
